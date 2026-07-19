@@ -79,6 +79,7 @@
   .result-value.capped { color: #fbbf24; }
   .result-value.error { color: #ef4444; font-size: 13px; font-family: inherit; font-weight: 500; text-align: right; }
   .result-value .unit { font-size: 14px; color: #6b7280; margin-left: 4px; font-weight: 400; }
+  .result-value .unit-kg { font-size: 12px; color: #6b7280; margin-left: 8px; font-weight: 400; }
 
   .warning {
     margin-top: 14px; padding: 12px 14px;
@@ -266,6 +267,11 @@
     return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
+  const KG_TO_LB = 2.20462;
+  function toKg(lb) {
+    return Math.round(lb / KG_TO_LB / 10) * 10;
+  }
+
   function compute() {
     const paEl = document.getElementById('pa');
     const oatEl = document.getElementById('oat');
@@ -291,7 +297,8 @@
       igeEl.textContent = igeResult.note;
       igeEl.className = 'result-value error';
     } else {
-      igeEl.innerHTML = fmt(igeResult.value) + ' <span class="unit">lb</span>';
+      igeEl.innerHTML = fmt(igeResult.value) + ' <span class="unit">lb</span>' +
+        '<span class="unit-kg">' + fmt(toKg(igeResult.value)) + ' kg</span>';
       igeEl.className = 'result-value' + (igeResult.capped ? ' capped' : '');
     }
 
@@ -299,7 +306,8 @@
       ogeEl.textContent = ogeResult.note;
       ogeEl.className = 'result-value error';
     } else {
-      ogeEl.innerHTML = fmt(ogeResult.value) + ' <span class="unit">lb</span>';
+      ogeEl.innerHTML = fmt(ogeResult.value) + ' <span class="unit">lb</span>' +
+        '<span class="unit-kg">' + fmt(toKg(ogeResult.value)) + ' kg</span>';
       ogeEl.className = 'result-value' + (ogeResult.capped ? ' capped' : '');
     }
 
