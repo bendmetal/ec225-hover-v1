@@ -1,7 +1,7 @@
 // EC225 Hover Performance - Service Worker
 // Caches the app for full offline use after first load
 
-const CACHE_NAME = 'ec225-hover-v5';
+const CACHE_NAME = 'ec225-hover-v6';
 const FILES_TO_CACHE = [
   './',
   './index.html'
